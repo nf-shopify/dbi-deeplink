@@ -8,6 +8,6 @@ function toggleCart() {
     button.textContent = "Open Order in Shopify POS";
   } else {
     window.location.href =
-      "com.shopify.pos://orders/draftOrderDetails/1131440275512";
+      "com.shopify.pos://orders/draftOrderDetails/1131440209976";
   }
 }
