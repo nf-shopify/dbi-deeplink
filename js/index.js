@@ -4,8 +4,22 @@ const API_TOKEN = process.env.API_TOKEN;
 
 let orderCreated = false;
 
-async function toggleCart() {
-  const mutationQuery =
+function toggleCart() {
+  if (!orderCreated) {
+    orderCreated = true;
+    console.log("About to create draft Order")
+    const button = document.getElementById("orderButton");
+    draftOrderCreate()
+    button.textContent = "Open Order in Shopify POS";
+  } else {
+    window.location.href =
+      "com.shopify.pos://orders/draftOrderDetails/1131440209976";
+  }
+}
+
+
+async function draftOrderCreate() {
+    const mutationQuery =
     "mutation draftOrderCreate($input: DraftOrderInput!) { draftOrderCreate(input: $input) {draftOrder {id, invoiceUrl}}}";
 
   const input = {
@@ -39,27 +53,15 @@ async function toggleCart() {
     variables: { input },
   };
 
-  const button = document.getElementById("orderButton");
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Access-Token": API_TOKEN,
+    },
+    body: jsonBody,
+  });
 
-  if (!orderCreated) {
-    orderCreated = true;
-    console.log("it's working")
-
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Origin" : "*",
-        "Content-Type": "application/json",
-        "X-Shopify-Access-Token": API_TOKEN,
-      },
-      body: jsonBody,
-    });
-
-    draftOrderData = await res.json();
-    console.log(draftOrderData);
-    button.textContent = "Open Order in Shopify POS";
-  } else {
-    window.location.href =
-      "com.shopify.pos://orders/draftOrderDetails/1131440209976";
-  }
+  draftOrderData = await res.json();
+  console.log(draftOrderData);
 }
