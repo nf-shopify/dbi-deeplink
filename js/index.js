@@ -1,15 +1,15 @@
-console.log("It's alive");
+let orderCreated = false;
 const API_URL = process.env.API_URL;
 const API_TOKEN = process.env.API_TOKEN;
 
-let orderCreated = false;
+console.log("It's alive");
 
 function toggleCart() {
   const button = document.getElementById("orderButton");
   if (!orderCreated) {
     orderCreated = true;
     console.log("About to create draft Order");
-    //draftOrderCreate();
+    draftOrderCreate();
     button.textContent = "Open Order in Shopify POS";
   } else {
     window.location.href =
