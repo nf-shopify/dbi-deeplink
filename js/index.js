@@ -1,5 +1,4 @@
 console.log("It's alive");
-console.log("API URL : " + API_URL);
 
 let orderCreated = false;
 
@@ -42,10 +41,12 @@ async function toggleCart() {
 
   if (!orderCreated) {
     orderCreated = true;
+    console.log("it's working")
 
     const res = await fetch(API_URL, {
       method: "POST",
       headers: {
+        "Access-Control-Allow-Origin" : "*",
         "Content-Type": "application/json",
         "X-Shopify-Access-Token": API_TOKEN,
       },
