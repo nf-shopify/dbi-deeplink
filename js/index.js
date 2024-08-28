@@ -1,4 +1,6 @@
 console.log("It's alive");
+const API_URL = process.env.API_URL;
+const API_TOKEN = process.env.API_TOKEN;
 
 let orderCreated = false;
 
