@@ -5,11 +5,11 @@ const API_TOKEN = process.env.API_TOKEN;
 let orderCreated = false;
 
 function toggleCart() {
+  const button = document.getElementById("orderButton");
   if (!orderCreated) {
     orderCreated = true;
-    console.log("About to create draft Order")
-    const button = document.getElementById("orderButton");
-    draftOrderCreate()
+    console.log("About to create draft Order");
+    //draftOrderCreate();
     button.textContent = "Open Order in Shopify POS";
   } else {
     window.location.href =
@@ -17,9 +17,8 @@ function toggleCart() {
   }
 }
 
-
 async function draftOrderCreate() {
-    const mutationQuery =
+  const mutationQuery =
     "mutation draftOrderCreate($input: DraftOrderInput!) { draftOrderCreate(input: $input) {draftOrder {id, invoiceUrl}}}";
 
   const input = {
