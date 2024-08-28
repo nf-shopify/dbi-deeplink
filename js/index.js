@@ -2,8 +2,6 @@ let orderCreated = false;
 console.log("It's alive");
 
 function toggleCart() {
-  const API_URL = process.env.API_URL;
-  const API_TOKEN = process.env.API_TOKEN;
   const button = document.getElementById("orderButton");
   if (!orderCreated) {
     orderCreated = true;
@@ -17,6 +15,8 @@ function toggleCart() {
 }
 
 async function draftOrderCreate() {
+  const API_URL = process.env.API_URL;
+  const API_TOKEN = process.env.API_TOKEN;
   const mutationQuery =
     "mutation draftOrderCreate($input: DraftOrderInput!) { draftOrderCreate(input: $input) {draftOrder {id, invoiceUrl}}}";
 
